@@ -13,12 +13,18 @@ class TipCalculator {
         return subtotal * tipPercentage;
     }
     
-    func printPossibleTips() {
-        print("15%: \(calculateTipWithTipPercentage(0.15))")
-        print("18%: \(calculateTipWithTipPercentage(0.18))")
-        print("20%: \(calculateTipWithTipPercentage(0.20))")
+    func returnPossibleTips() -> [Int: Double]{
+        let possibleTips = [0.15, 0.18, 0.20]
+        var calculatedTips = [Int: Double]()
+        
+        for possibleTip in possibleTips {
+            let percentage = Int(possibleTip * 100)
+            calculatedTips[percentage] = calculateTipWithTipPercentage(possibleTip)
+        }
+        
+        return calculatedTips
     }
 }
 
 let tipCalculator = TipCalculator(total: 33.25, taxPercentage: 0.06)
-tipCalculator.printPossibleTips()
+tipCalculator.returnPossibleTips()
